@@ -17,6 +17,8 @@ def make_single_call(row):
     Make a single API call with one row of data.
     """
     # Directly send the row as JSON
+    req = row.to_dict()
+    print(req)
     response = requests.post(API_URL, json=row.to_dict())
     return response.json()
 
