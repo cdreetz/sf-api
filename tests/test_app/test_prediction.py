@@ -10,7 +10,7 @@ scaler = settings.scaler_path
 model_variables = settings.model_variables_path
 
 # URL of your FastAPI application
-API_URL = "http://0.0.0.:1313/predict"
+API_URL = "http://34.135.31.176:1313/predict"
 
 def make_single_call(row):
     """
