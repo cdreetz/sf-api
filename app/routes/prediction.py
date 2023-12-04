@@ -1,21 +1,20 @@
 # prediction API endpoint
 from fastapi import APIRouter, HTTPException
-from app.models.prediction_models import SingleDataModel, DataModel, ResponseModel, PredictionResult
+from app.models.prediction_models import SingleDataModel, ResponseModel, PredictionResult
 from app.services.data_preparation import prepare_data
 from app.services.model_loader import load_model
 import logging
-from typing import List
+from typing import List, Union
 
 router = APIRouter()
 model = load_model()
 
 
 @router.post("/predict", response_model=ResponseModel)
-async def predict(request_data: DataModel):
+async def predict(data: Union[SingleDataModel, List[SingleDataModel]]):
 
     try:
         logging.info("Data received")
-        data = request_data.__root__
         if isinstance(data, SingleDataModel):
             data = [data]
 
@@ -30,8 +29,11 @@ async def predict(request_data: DataModel):
         predictions = (probabilities >= 0.5).astype(int)
 
         response = ResponseModel(results=[
-            PredictionResult(predicted_class=int(pred), probability=float(prob), variables=row)
-            for prob, row, pred in zip(predictions, probabilities, prepared_data.to_dict('records'))
+            PredictionResult(
+                predicted_class=int(pred), 
+                probability=float(prob), 
+                variables=row)
+            for prob, row, pred in zip(probabilities.values, prepared_data.to_dict('records'), predictions.values)
         ])
         return response
 

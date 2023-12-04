@@ -10,7 +10,7 @@ scaler = settings.scaler_path
 model_variables = settings.model_variables_path
 
 # URL of your FastAPI application
-API_URL = "http://localhost:1313/predict"
+API_URL = "http://0.0.0.:1313/predict"
 
 def make_single_call(row):
     """
@@ -40,14 +40,20 @@ def format_data_for_json(data):
 
     # Fill NaN values with a default number, e.g., 0 or an appropriate value for your context
     data = data.fillna(0)
+    string_columns = ['x5', 'x12', 'x31', 'x63', 'x81', 'x82']
+
 
     # Ensure all floats are rounded to a fixed number of decimal places
     if isinstance(data, pd.DataFrame):
         for col in data.select_dtypes(include=['float64', 'float32']):
             data[col] = data[col].apply(lambda x: round(x, 4))
+        for col in string_columns:
+            data[col] = data[col]. replace(0, '')
     elif isinstance(data, pd.Series):
         if data.dtype in ['float64', 'float32']:
             data = data.apply(lambda x: round(x, 4))
+        if data.name in string_columns:
+            data = data.replace(0, '')
 
     return data
 

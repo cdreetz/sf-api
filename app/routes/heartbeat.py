@@ -5,8 +5,7 @@ import logging
 
 router = APIRouter()
 
-
-@router.post("/heartbeat", methods = ['GET'])
+@router.get("/heartbeat")
 def heartbeat():
     message = json.dumps({'Status': 'heartbeat'})
-    return Response(message, status = 200, mimetype = 'applicaion/json')
+    return Response(message, status = 200, media_type = 'application/json')

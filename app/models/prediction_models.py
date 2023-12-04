@@ -1,5 +1,5 @@
 # prediction models 
-from pydantic import BaseModel, create_model
+from pydantic import BaseModel, create_model, root_validator
 from typing import Union, List, Any
 
 
@@ -14,8 +14,7 @@ for col in string_columns:
 # Assuming the definition of string_columns and fields here
 SingleDataModel = create_model('SingleDataModel', **fields)
 
-class DataModel(BaseModel):
-    __root__: Union[SingleDataModel, List[SingleDataModel]]
+
 
 class PredictionResult(BaseModel):
     predicted_class: int
