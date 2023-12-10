@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-api-deployment
+  labels:
+    app: python-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-api
+  template:
+    metadata:
+      labels:
+        app: python-api
+    spec:
+      containers:
+      - name: python-api
+        image: my-fastapi-image 
+        ports:
+        - containerPort: 1313 
+          resources:
+          requests:  
+            memory: "128Mi"
+            cpu: "250m
+
