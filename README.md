@@ -1,4 +1,17 @@
+## Introduction
+This is a project submission consisting of a FastAPI serving ML model predictions in both single and batch requests.
+FastAPI is the ideal framework for serving ML models because of its overall performance and asynch functionality with Uvicorn.  It is also a personal favorite of mine given its simplicity, allowing for very quick deployment of API endpoints.
 
+## Project Structure
+App: The data models, routes, and services required to serve the API endpoint
+Config: Configuration settings including necessary file paths or env variables
+Kube: Deployment and service configuration files for scaling with Kubernetes
+Pickles: Pkl files for the model, model variables, and scaler
+Tests: Unit tests for data models and endpoints
+Training: Script that covers the steps used during training, and usable for preprocessing request data
+Dockerfile: The file for turning the API into a Docker image
+requirements.txt: The dependencies used provided by a pip freeze
+run_api.sh: A shell script for building and running the docker image
 
 ## Scaling With Kubernetes
 Requirements:
