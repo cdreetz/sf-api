@@ -1,6 +1,6 @@
 ## Introduction
 This is an example project for ML deployment consisting of a FastAPI serving ML model predictions in both single and batch requests.
-FastAPI is the ideal framework for serving ML models because of its overall performance and asynch functionality with Uvicorn.  It is also a personal favorite of mine given its simplicity, allowing for very quick deployment of API endpoints.
+FastAPI is the ideal framework for serving ML models because of its overall performance and async functionality with Uvicorn.  It is also a personal favorite of mine given its simplicity, allowing for very quick deployment of API endpoints.
 
 <b>*Will use in a blog post explaining the process in more detail.... eventually.</b>
 
